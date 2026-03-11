@@ -4,6 +4,7 @@ import VendorTable from '../components/VendorTable';
 import { vendors } from '../data/vendors';
 import Toast from '../components/Toast';
 import QuoteValidator from '../components/QuoteValidator';
+import PremiumBadge from '../components/PremiumBadge';
 
 export default function Predictive() {
   const [showVendors, setShowVendors] = useState(false);
@@ -26,7 +27,10 @@ export default function Predictive() {
 
   return (
     <div className="animate-fade-in">
-      <h1 className="text-2xl font-bold text-gray-900 mb-1">Predictive Maintenance</h1>
+      <div className="flex items-center gap-3 mb-1">
+        <h1 className="text-2xl font-bold text-gray-900">Predictive Maintenance</h1>
+        <PremiumBadge label="Phase 2" tooltip="Autonomous execution available after 60-day pilot validation. During pilot: alerts and recommendations with human approval." />
+      </div>
       <p className="text-sm text-gray-500 mb-6">AI-powered failure prediction and preventive action</p>
 
       {/* Summary cards */}
@@ -97,13 +101,16 @@ export default function Predictive() {
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex gap-3">
+        <div className="flex items-center gap-3">
           <button onClick={() => setShowVendors(!showVendors)} className="flex items-center gap-1.5 px-5 py-2.5 bg-accent text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
             {showVendors ? <ChevronUp size={16} /> : <ChevronDown size={16} />} View Matched Vendors
           </button>
-          <button onClick={() => setShowWorkOrder(true)} disabled={!selectedVendor} className={`flex items-center gap-1.5 px-5 py-2.5 text-sm font-medium rounded-lg transition-colors ${selectedVendor ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}>
-            <FileText size={16} /> Auto-Draft Work Order
-          </button>
+          <div className="flex items-center gap-2">
+            <button onClick={() => setShowWorkOrder(true)} disabled={!selectedVendor} className={`flex items-center gap-1.5 px-5 py-2.5 text-sm font-medium rounded-lg transition-colors ${selectedVendor ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}>
+              <FileText size={16} /> Auto-Draft Work Order
+            </button>
+            <PremiumBadge inline={true} label="Phase 2" />
+          </div>
         </div>
       </div>
 

@@ -40,8 +40,8 @@ export default function Login() {
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/20 border border-accent/30 mb-4">
             <Zap size={28} className="text-accent" />
           </div>
-          <h1 className="text-2xl font-bold text-white">FacilityAI</h1>
-          <p className="text-gray-400 text-sm mt-1">Intelligent Building Operations</p>
+          <h1 className="text-2xl font-bold text-white">Operon</h1>
+          <p className="text-gray-400 text-sm mt-1">Autonomous Building Intelligence</p>
         </div>
 
         {/* Card */}
@@ -56,7 +56,7 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="fm@facilityai.com"
+                placeholder="jll@demo.com"
                 className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all"
                 required
               />

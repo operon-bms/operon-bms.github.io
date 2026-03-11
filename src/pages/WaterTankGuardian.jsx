@@ -190,11 +190,18 @@ export default function WaterTankGuardian() {
             {/* Water level visualization */}
             <div className="relative h-32 bg-gray-100 rounded-lg mb-3 overflow-hidden">
               <div
-                className={`absolute bottom-0 left-0 right-0 ${getLevelColor(tank.level, tank.status)} transition-all duration-500`}
+                className={`absolute bottom-0 left-0 right-0 ${getLevelColor(tank.level, tank.status)} transition-all duration-1000`}
                 style={{ height: `${Math.min(tank.level, 100)}%` }}
               >
                 {/* Wave animation */}
-                <div className="absolute top-0 left-0 right-0 h-2 bg-white/20 animate-pulse" />
+                <svg className="absolute top-0 left-0 w-full" viewBox="0 0 200 8" preserveAspectRatio="none" style={{ height: '8px', transform: 'translateY(-4px)' }}>
+                  <path d="M0,4 C25,0 50,8 75,4 C100,0 125,8 150,4 C175,0 200,8 200,4 L200,8 L0,8 Z" fill="currentColor" className="opacity-40">
+                    <animateTransform attributeName="transform" type="translate" from="-100,0" to="0,0" dur="3s" repeatCount="indefinite" />
+                  </path>
+                  <path d="M0,4 C25,8 50,0 75,4 C100,8 125,0 150,4 C175,8 200,0 200,4 L200,8 L0,8 Z" fill="currentColor" className="opacity-20">
+                    <animateTransform attributeName="transform" type="translate" from="0,0" to="-100,0" dur="4s" repeatCount="indefinite" />
+                  </path>
+                </svg>
               </div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-3xl font-bold text-gray-900 drop-shadow-lg">{tank.level}%</span>

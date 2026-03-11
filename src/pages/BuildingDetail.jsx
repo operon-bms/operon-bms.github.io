@@ -8,6 +8,7 @@ import { useState } from 'react';
 import BillExplainer from '../components/BillExplainer';
 import TenantComplaintIntelligence from '../components/TenantComplaintIntelligence';
 import ShiftHandoverBrief from '../components/ShiftHandoverBrief';
+import PremiumBadge from '../components/PremiumBadge';
 
 export default function BuildingDetail() {
   const { buildingId } = useParams();
@@ -106,8 +107,11 @@ export default function BuildingDetail() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-900">Auto-Execute</p>
-                <p className="text-[11px] text-gray-500">Automatically apply low-risk changes</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-sm font-medium text-gray-900">Auto-Execute</p>
+                  <PremiumBadge inline={true} label="Phase 2" />
+                </div>
+                <p className="text-[11px] text-gray-500 mt-0.5">Automatically apply low-risk changes</p>
               </div>
               <button onClick={() => setAutoExec(!autoExec)} className={autoExec ? 'text-ok' : 'text-gray-400'}>
                 {autoExec ? <ToggleRight size={28} /> : <ToggleLeft size={28} />}
@@ -115,8 +119,11 @@ export default function BuildingDetail() {
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-900">Auto-Approve</p>
-                <p className="text-[11px] text-gray-500">Skip manual approval for high-confidence</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-sm font-medium text-gray-900">Auto-Approve</p>
+                  <PremiumBadge inline={true} label="Phase 2" />
+                </div>
+                <p className="text-[11px] text-gray-500 mt-0.5">Skip manual approval for high-confidence</p>
               </div>
               <button onClick={() => setAutoApprove(!autoApprove)} className={autoApprove ? 'text-ok' : 'text-gray-400'}>
                 {autoApprove ? <ToggleRight size={28} /> : <ToggleLeft size={28} />}

@@ -39,7 +39,7 @@ export default function MorningBriefing() {
         {/* Main briefing */}
         <div className="flex justify-start">
           <div className="wa-bubble wa-bubble-left max-w-[92%]">
-            <p className="text-[10px] font-semibold text-accent mb-2">FacilityAI Agent</p>
+            <p className="text-[10px] font-semibold text-accent mb-2">Operon Agent</p>
             <div className="text-sm text-gray-800 space-y-3">
               <div>
                 <p className="font-semibold text-gray-900 mb-2">PORTFOLIO STATUS — 11 Mar 2026</p>
@@ -114,12 +114,12 @@ export default function MorningBriefing() {
       <div className="bg-gradient-to-r from-gray-900 to-navy-900 rounded-xl p-4 text-white">
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
-            <p className="text-xs text-gray-400">Without FacilityAI</p>
+            <p className="text-xs text-gray-400">Without Operon</p>
             <p className="text-lg font-bold font-mono text-gray-300">~90 min</p>
             <p className="text-[10px] text-gray-500">morning rounds</p>
           </div>
           <div>
-            <p className="text-xs text-gray-400">With FacilityAI</p>
+            <p className="text-xs text-gray-400">With Operon</p>
             <p className="text-lg font-bold font-mono text-ok">3 min</p>
             <p className="text-[10px] text-gray-500">review + 3 taps</p>
           </div>

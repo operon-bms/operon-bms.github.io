@@ -116,7 +116,7 @@ export default function OvernightSummary() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Good Morning</h1>
-        <p className="text-sm text-gray-500">FacilityAI ran your buildings last night — here's what happened</p>
+        <p className="text-sm text-gray-500">Operon ran your buildings last night — here's what happened</p>
       </div>
 
       {/* Summary stats */}
@@ -169,7 +169,8 @@ export default function OvernightSummary() {
             return (
               <div
                 key={action.category}
-                className={`border rounded-lg transition-all ${isExpanded ? 'border-accent bg-blue-50/30' : 'border-gray-200 hover:border-gray-300'}`}
+                className={`border rounded-lg transition-all animate-fade-in ${isExpanded ? 'border-accent bg-blue-50/30' : 'border-gray-200 hover:border-gray-300'}`}
+                style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'both' }}
               >
                 <button
                   onClick={() => toggleExpand(action.category)}
@@ -317,12 +318,12 @@ export default function OvernightSummary() {
       <div className="bg-gradient-to-r from-gray-900 to-navy-900 rounded-xl p-5 text-white">
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
-            <p className="text-xs text-gray-400 mb-1">Without FacilityAI</p>
+            <p className="text-xs text-gray-400 mb-1">Without Operon</p>
             <p className="text-2xl font-bold font-mono text-gray-300">~45 min</p>
             <p className="text-[10px] text-gray-500">manual morning rounds</p>
           </div>
           <div>
-            <p className="text-xs text-gray-400 mb-1">With FacilityAI</p>
+            <p className="text-xs text-gray-400 mb-1">With Operon</p>
             <p className="text-2xl font-bold font-mono text-ok">4 min</p>
             <p className="text-[10px] text-gray-500">review + 3 taps</p>
           </div>

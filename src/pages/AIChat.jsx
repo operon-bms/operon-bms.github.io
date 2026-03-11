@@ -93,7 +93,7 @@ export default function AIChat() {
           <div className="flex gap-3 animate-fade-in">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-[10px] font-bold text-white shrink-0">AI</div>
             <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3">
-              <p className="text-[10px] font-semibold text-accent mb-1">FacilityAI Agent</p>
+              <p className="text-[10px] font-semibold text-accent mb-1">Operon Agent</p>
               <div className="flex gap-1">
                 <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                 <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />

@@ -1,39 +1,53 @@
 import { useState } from 'react';
-import { DollarSign, TrendingDown, TrendingUp, Building, Users, Calculator } from 'lucide-react';
+import { DollarSign, TrendingDown, TrendingUp, Building, Users, Calculator, Droplets, Wrench, Shield } from 'lucide-react';
 
 export default function ROICalculator() {
   const [buildings, setBuildings] = useState(10);
   const [fmHeadcount, setFmHeadcount] = useState(5);
   const [avgSalary, setAvgSalary] = useState(35000);
 
-  // Pricing tiers (HKD/month)
+  // Pricing tiers per proposal §9 (HKD/month)
   const getSubscriptionCost = (n) => {
-    if (n <= 5) return 45000;
-    if (n <= 10) return 75000;
-    if (n <= 20) return 135000;
-    if (n <= 50) return 285000;
-    return 520000;
+    if (n <= 5) return 38000;
+    if (n <= 10) return 62000;
+    if (n <= 20) return 110000;
+    if (n <= 50) return 210000;
+    return null; // Custom pricing
   };
 
   const subscriptionCost = getSubscriptionCost(buildings);
-  const currentFmCost = fmHeadcount * avgSalary;
-  
-  // With FacilityAI: typically reduces FM headcount by 50-60%
-  const reducedHeadcount = Math.max(1, Math.round(fmHeadcount * 0.4));
-  const remainingFmCost = reducedHeadcount * avgSalary;
-  const totalCostWithFacilityAI = remainingFmCost + subscriptionCost;
-  const monthlySavings = currentFmCost - totalCostWithFacilityAI;
-  const annualSavings = monthlySavings * 12;
-  const paybackMonths = subscriptionCost > 0 ? Math.ceil(subscriptionCost / Math.max(1, monthlySavings)) : 0;
+  const isCustomPricing = subscriptionCost === null;
+  const effectiveSubscription = isCustomPricing ? 350000 : subscriptionCost;
 
-  const formatHKD = (n) => `HKD ${n.toLocaleString('en-HK')}`;
+  // Headcount optimisation — per proposal: 5 staff → 2 staff
+  const reducedHeadcount = Math.max(1, Math.round(fmHeadcount * 0.4));
+  const currentFmCost = fmHeadcount * avgSalary;
+  const remainingFmCost = reducedHeadcount * avgSalary;
+  const headcountSaving = currentFmCost - remainingFmCost;
+
+  // Incident prevention — per proposal §8
+  const waterTankSaving = Math.round(buildings * 0.2 * 200000); // 2 events/yr per 10 bldgs, HKD 200K avg
+  const emergencyRepairSaving = Math.round(buildings * 0.4 * 35000); // 4 events/yr per 10 bldgs
+
+  // Procurement intelligence — per proposal §8
+  const quoteValidationSaving = Math.round(buildings * 0.3 * 25000); // 3/yr per 10 bldgs
+
+  // Compliance & energy
+  const complianceSaving = Math.round(buildings * 17000); // HKD 170K/yr per 10 bldgs
+
+  const totalAnnualSaving = (headcountSaving * 12) + waterTankSaving + emergencyRepairSaving + quoteValidationSaving + complianceSaving;
+  const totalAnnualCost = (effectiveSubscription * 12);
+  const netBenefit = totalAnnualSaving - totalAnnualCost;
+  const roi = totalAnnualCost > 0 ? Math.round((netBenefit / totalAnnualCost) * 100) : 0;
+
+  const formatHKD = (n) => `HKD ${Math.abs(n).toLocaleString('en-HK')}`;
 
   return (
     <div className="animate-fade-in max-w-5xl">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">ROI Calculator</h1>
-        <p className="text-sm text-gray-500">See exactly how much FacilityAI saves your organisation</p>
+        <p className="text-sm text-gray-500">See exactly how Operon pays for itself — input your own numbers</p>
       </div>
 
       {/* Input sliders */}
@@ -88,7 +102,7 @@ export default function ROICalculator() {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <DollarSign size={16} className="text-gray-400" />
-              <label className="text-sm font-medium text-gray-700">Avg FM Salary (HKD)</label>
+              <label className="text-sm font-medium text-gray-700">Avg FM Salary (HKD/mo)</label>
             </div>
             <div className="flex items-center gap-4">
               <input
@@ -107,156 +121,181 @@ export default function ROICalculator() {
         </div>
       </div>
 
+      {/* Savings breakdown */}
+      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+        <h3 className="text-sm font-semibold text-gray-900 mb-4">Annual Savings Breakdown</h3>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Users size={16} className="text-blue-600" />
+              <div>
+                <p className="text-sm font-medium text-gray-900">Headcount optimisation</p>
+                <p className="text-xs text-gray-500">{fmHeadcount} staff → {reducedHeadcount} staff ({fmHeadcount - reducedHeadcount} redeployed)</p>
+              </div>
+            </div>
+            <span className="text-lg font-mono font-bold text-ok">{formatHKD(headcountSaving * 12)}</span>
+          </div>
+          <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Droplets size={16} className="text-emerald-600" />
+              <div>
+                <p className="text-sm font-medium text-gray-900">Incident prevention</p>
+                <p className="text-xs text-gray-500">Water tank overflow + emergency repairs prevented</p>
+              </div>
+            </div>
+            <span className="text-lg font-mono font-bold text-ok">{formatHKD(waterTankSaving + emergencyRepairSaving)}</span>
+          </div>
+          <div className="flex items-center justify-between p-3 bg-amber-50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Wrench size={16} className="text-amber-600" />
+              <div>
+                <p className="text-sm font-medium text-gray-900">Procurement intelligence</p>
+                <p className="text-xs text-gray-500">Contractor overquotes caught and challenged</p>
+              </div>
+            </div>
+            <span className="text-lg font-mono font-bold text-ok">{formatHKD(quoteValidationSaving)}</span>
+          </div>
+          <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Shield size={16} className="text-purple-600" />
+              <div>
+                <p className="text-sm font-medium text-gray-900">Compliance & energy</p>
+                <p className="text-xs text-gray-500">EPD violation avoidance + energy optimisation</p>
+              </div>
+            </div>
+            <span className="text-lg font-mono font-bold text-ok">{formatHKD(complianceSaving)}</span>
+          </div>
+          <hr className="border-gray-200" />
+          <div className="flex items-center justify-between p-3">
+            <span className="text-sm font-bold text-gray-900">Total Conservative Annual Saving</span>
+            <span className="text-2xl font-mono font-bold text-ok">{formatHKD(totalAnnualSaving)}</span>
+          </div>
+        </div>
+      </div>
+
       {/* Cost comparison */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         {/* Current state */}
         <div className="bg-gray-50 rounded-xl border border-gray-200 p-6">
-          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Current Monthly Cost</h3>
+          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Current Annual Cost</h3>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-700">FM Headcount ({fmHeadcount} people)</span>
-              <span className="text-lg font-mono font-bold text-gray-900">{formatHKD(currentFmCost)}</span>
+              <span className="text-lg font-mono font-bold text-gray-900">{formatHKD(currentFmCost * 12)}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-700">FacilityAI subscription</span>
+              <span className="text-sm text-gray-700">Operon subscription</span>
               <span className="text-lg font-mono font-bold text-gray-400">—</span>
             </div>
             <hr className="border-gray-300" />
             <div className="flex justify-between items-center">
               <span className="text-sm font-medium text-gray-900">Total</span>
-              <span className="text-2xl font-mono font-bold text-gray-900">{formatHKD(currentFmCost)}</span>
+              <span className="text-2xl font-mono font-bold text-gray-900">{formatHKD(currentFmCost * 12)}</span>
             </div>
           </div>
         </div>
 
-        {/* With FacilityAI */}
+        {/* With Operon */}
         <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl border-2 border-blue-300 p-6">
-          <h3 className="text-sm font-semibold text-blue-700 uppercase tracking-wider mb-4">With FacilityAI</h3>
+          <h3 className="text-sm font-semibold text-blue-700 uppercase tracking-wider mb-4">With Operon</h3>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-700">FM Headcount ({reducedHeadcount} people)</span>
-              <span className="text-lg font-mono font-bold text-gray-900">{formatHKD(remainingFmCost)}</span>
+              <span className="text-lg font-mono font-bold text-gray-900">{formatHKD(remainingFmCost * 12)}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-700">FacilityAI subscription ({buildings} bldg)</span>
-              <span className="text-lg font-mono font-bold text-gray-900">{formatHKD(subscriptionCost)}</span>
+              <span className="text-sm text-gray-700">Operon subscription ({buildings} bldg)</span>
+              <span className="text-lg font-mono font-bold text-gray-900">
+                {isCustomPricing ? 'Custom' : formatHKD(effectiveSubscription * 12)}
+              </span>
             </div>
             <hr className="border-blue-200" />
             <div className="flex justify-between items-center">
               <span className="text-sm font-medium text-gray-900">Total</span>
-              <span className="text-2xl font-mono font-bold text-blue-700">{formatHKD(totalCostWithFacilityAI)}</span>
+              <span className="text-2xl font-mono font-bold text-blue-700">
+                {isCustomPricing ? 'Custom' : formatHKD(totalAnnualCost + (remainingFmCost * 12))}
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Savings summary */}
+      {/* ROI Summary */}
       <div className={`rounded-xl border-2 p-6 mb-6 ${
-        monthlySavings >= 0 
-          ? 'bg-emerald-50 border-emerald-300' 
+        netBenefit >= 0
+          ? 'bg-emerald-50 border-emerald-300'
           : 'bg-amber-50 border-amber-300'
       }`}>
         <div className="flex items-center gap-3 mb-4">
-          {monthlySavings >= 0 ? (
+          {netBenefit >= 0 ? (
             <TrendingUp size={24} className="text-ok" />
           ) : (
             <TrendingDown size={24} className="text-amber-600" />
           )}
           <h3 className="text-lg font-bold text-gray-900">
-            {monthlySavings >= 0 ? 'Monthly Savings' : 'Investment Required'}
+            {netBenefit >= 0 ? 'Year 1 Return on Investment' : 'Investment Required'}
           </h3>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <div>
-            <p className="text-xs text-gray-500 mb-1">Monthly Savings</p>
-            <p className={`text-3xl font-mono font-bold ${monthlySavings >= 0 ? 'text-ok' : 'text-amber-700'}`}>
-              {formatHKD(Math.abs(monthlySavings))}
+            <p className="text-xs text-gray-500 mb-1">Annual Saving</p>
+            <p className="text-2xl font-mono font-bold text-ok">{formatHKD(totalAnnualSaving)}</p>
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Operon Cost</p>
+            <p className="text-2xl font-mono font-bold text-gray-700">
+              {isCustomPricing ? 'Custom' : formatHKD(totalAnnualCost)}
             </p>
           </div>
           <div>
-            <p className="text-xs text-gray-500 mb-1">Annual Savings</p>
-            <p className={`text-3xl font-mono font-bold ${monthlySavings >= 0 ? 'text-ok' : 'text-amber-700'}`}>
-              {formatHKD(Math.abs(annualSavings))}
+            <p className="text-xs text-gray-500 mb-1">Net Benefit</p>
+            <p className={`text-2xl font-mono font-bold ${netBenefit >= 0 ? 'text-ok' : 'text-amber-700'}`}>
+              {isCustomPricing ? 'Custom' : formatHKD(netBenefit)}
             </p>
           </div>
           <div>
-            <p className="text-xs text-gray-500 mb-1">Payback Period</p>
-            <p className={`text-3xl font-mono font-bold ${monthlySavings >= 0 ? 'text-ok' : 'text-amber-700'}`}>
-              {monthlySavings >= 0 ? 'Immediate' : `${paybackMonths} months`}
+            <p className="text-xs text-gray-500 mb-1">Year 1 ROI</p>
+            <p className={`text-2xl font-mono font-bold ${netBenefit >= 0 ? 'text-ok' : 'text-amber-700'}`}>
+              {isCustomPricing ? 'Custom' : `${roi}%`}
             </p>
           </div>
         </div>
-        {monthlySavings >= 0 && (
+        {netBenefit >= 0 && !isCustomPricing && (
           <p className="text-sm text-ok font-medium mt-4">
-            ✓ Positive cash flow from month 1 — FacilityAI pays for itself immediately
+            ✓ Positive cash flow from month 1 — Operon pays for itself immediately
           </p>
         )}
       </div>
 
-      {/* Headcount impact */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-        <h3 className="text-sm font-semibold text-gray-900 mb-4">FM Headcount Impact</h3>
-        <div className="flex items-center gap-8">
-          <div className="flex-1">
-            <div className="flex justify-between text-sm mb-2">
-              <span className="text-gray-500">Current</span>
-              <span className="font-medium">{fmHeadcount} FMs</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-4">
-              <div className="bg-gray-500 h-4 rounded-full" style={{ width: '100%' }} />
-            </div>
-          </div>
-          <div className="text-gray-400">→</div>
-          <div className="flex-1">
-            <div className="flex justify-between text-sm mb-2">
-              <span className="text-gray-500">With FacilityAI</span>
-              <span className="font-medium text-ok">{reducedHeadcount} FMs</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-4">
-              <div className="bg-ok h-4 rounded-full" style={{ width: `${(reducedHeadcount / fmHeadcount) * 100}%` }} />
-            </div>
-          </div>
-          <div className="text-gray-400">=</div>
-          <div className="text-center">
-            <p className="text-3xl font-bold text-accent">{fmHeadcount - reducedHeadcount}</p>
-            <p className="text-xs text-gray-500">FMs redeployed</p>
-          </div>
-        </div>
-        <p className="text-xs text-gray-500 mt-4">
-          FacilityAI automates routine monitoring, optimisation, and compliance tasks — allowing your FM team to focus on strategic work. 
-          Typical reduction: 50–60% headcount while maintaining or improving building performance.
-        </p>
-      </div>
-
-      {/* Pricing breakdown */}
+      {/* Pricing tiers */}
       <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h3 className="text-sm font-semibold text-gray-900 mb-4">FacilityAI Pricing Tiers</h3>
+        <h3 className="text-sm font-semibold text-gray-900 mb-4">Operon Pricing Tiers (Post-Pilot)</h3>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           {[
-            { range: '1–5', price: 45000 },
-            { range: '6–10', price: 75000 },
-            { range: '11–20', price: 135000 },
-            { range: '21–50', price: 285000 },
-            { range: '50+', price: 520000 },
-          ].map((tier, i) => (
+            { range: '1–5', price: 38000, annual: 456000 },
+            { range: '6–10', price: 62000, annual: 744000 },
+            { range: '11–20', price: 110000, annual: 1320000 },
+            { range: '21–50', price: 210000, annual: 2520000 },
+            { range: '50+', price: null },
+          ].map((tier) => (
             <div
               key={tier.range}
               className={`border rounded-lg p-3 text-center transition-all ${
-                buildings <= parseInt(tier.range.split('–')[1] || '999') && 
+                buildings <= parseInt(tier.range.split('–')[1] || '999') &&
                 buildings >= parseInt(tier.range.split('–')[0])
-                  ? 'border-blue-400 bg-blue-50' 
+                  ? 'border-blue-400 bg-blue-50'
                   : 'border-gray-200'
               }`}
             >
               <p className="text-xs text-gray-500 mb-1">{tier.range} buildings</p>
-              <p className="text-sm font-bold text-gray-900">{formatHKD(tier.price)}</p>
+              <p className="text-sm font-bold text-gray-900">{tier.price ? formatHKD(tier.price) : 'Custom'}</p>
               <p className="text-[10px] text-gray-400">per month</p>
             </div>
           ))}
         </div>
         <p className="text-xs text-gray-500 mt-4">
-          All tiers include: unlimited AI usage, predictive maintenance, vendor matching, HK compliance reports, 24/7 support.
-          No hidden API costs — Claude usage is included.
+          All tiers include: AI processing costs (fair-use), predictive maintenance, compliance reports, 24/7 support.
+          No hidden API costs — DeepSeek V3 usage is included in subscription.
         </p>
       </div>
     </div>

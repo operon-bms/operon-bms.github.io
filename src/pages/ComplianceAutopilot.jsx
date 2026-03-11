@@ -233,18 +233,18 @@ export default function ComplianceAutopilot() {
 
             <div className="grid grid-cols-5 gap-4 mb-6">
               {[
-                { label: 'CO₂', value: 847, unit: 'ppm', limit: 1000, icon: '🌬️' },
-                { label: 'PM2.5', value: 12, unit: 'µg/m³', limit: 75, icon: '🔬' },
-                { label: 'TVOC', value: 0.21, unit: 'ppm', limit: 1.0, icon: '🧪' },
-                { label: 'Temp', value: 22.4, unit: '°C', limit: '20–26', icon: '🌡️' },
-                { label: 'Humidity', value: 58.3, unit: '%', limit: '40–70', icon: '💧' },
+                { label: 'CO₂', value: 847, unit: 'ppm', limit: 1000, icon: '🌬️', cls: 'Class 1' },
+                { label: 'PM2.5', value: 12, unit: 'µg/m³', limit: 75, icon: '🔬', cls: 'Class 1' },
+                { label: 'TVOC', value: 0.21, unit: 'ppm', limit: 1.0, icon: '🧪', cls: 'Class 1' },
+                { label: 'Temp', value: 22.4, unit: '°C', limit: '20–26', icon: '🌡️', cls: 'Class 1' },
+                { label: 'Humidity', value: 58.3, unit: '%', limit: '40–70', icon: '💧', cls: 'Class 1' },
               ].map(param => (
                 <div key={param.label} className="text-center p-3 bg-white rounded-lg border border-emerald-200">
                   <div className="text-xl mb-1">{param.icon}</div>
                   <p className="text-xs text-gray-500">{param.label}</p>
                   <p className="text-lg font-bold text-gray-900">{param.value} <span className="text-xs font-normal text-gray-500">{param.unit}</span></p>
                   <p className="text-[10px] text-emerald-700">Limit: {param.limit}</p>
-                  <p className="text-[10px] text-emerald-700 font-medium mt-1">✓ {param.class}</p>
+                  <p className="text-[10px] text-emerald-700 font-medium mt-1">✓ {param.cls}</p>
                 </div>
               ))}
             </div>

@@ -43,7 +43,7 @@ export default function ChatBubble({ message, isTyping = false, onTypingDone }) 
           : 'bg-accent text-white rounded-tr-sm'
       }`}>
         {isAI && (
-          <p className="text-[10px] font-semibold text-accent mb-1">FacilityAI Agent</p>
+          <p className="text-[10px] font-semibold text-accent mb-1">Operon Agent</p>
         )}
         <div className={`text-sm leading-relaxed whitespace-pre-wrap ${!isDone ? 'typewriter-cursor' : ''}`}>
           {renderFormattedText(displayText)}

@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useCallback } from 'react';
 const AuthContext = createContext(null);
 
 const VALID_CREDENTIALS = [
-  { email: 'fm@facilityai.com', password: 'demo2026', name: 'Facility Manager' },
+  { email: 'fm@operon.ai', password: 'demo2026', name: 'Facility Manager' },
   { email: 'jll@demo.com', password: 'jll2026', name: 'JLL Facility Manager' },
 ];
 

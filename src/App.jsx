@@ -14,7 +14,12 @@ import OvernightSummary from './pages/OvernightSummary';
 import ROICalculator from './pages/ROICalculator';
 import ComplianceAutopilot from './pages/ComplianceAutopilot';
 import WaterTankGuardian from './pages/WaterTankGuardian';
-import { useState } from 'react';
+import ComparisonPage from './pages/ComparisonPage';
+import ShiftHandover from './pages/ShiftHandover';
+import TenantComplaints from './pages/TenantComplaints';
+import BillExplainerPage from './pages/BillExplainerPage';
+import { useState, createContext, useContext } from 'react';
+import { useLiveData } from './hooks/useLiveData';
 
 function ProtectedRoute() {
   const { isAuthenticated } = useAuth();
@@ -48,10 +53,6 @@ function AppLayout() {
   );
 }
 
-// Simple context to share live data updating state
-import { createContext, useContext } from 'react';
-import { useLiveData } from './hooks/useLiveData';
-
 const LiveDataContext = createContext({ isUpdating: false });
 function useLiveDataContext() { return useContext(LiveDataContext); }
 
@@ -79,6 +80,10 @@ export default function App() {
             <Route path="/roi" element={<ROICalculator />} />
             <Route path="/compliance" element={<ComplianceAutopilot />} />
             <Route path="/water" element={<WaterTankGuardian />} />
+            <Route path="/comparison" element={<ComparisonPage />} />
+            <Route path="/shift-handover" element={<ShiftHandover />} />
+            <Route path="/tenant-complaints" element={<TenantComplaints />} />
+            <Route path="/bill-explainer" element={<BillExplainerPage />} />
             <Route path="*" element={<Navigate to="/summary" replace />} />
           </Route>
         </Routes>
