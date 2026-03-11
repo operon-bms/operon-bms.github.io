@@ -58,7 +58,7 @@ function LiveDataProvider({ children }) {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/facilityai-demo">
+    <BrowserRouter basename="/">
       <LiveDataProvider>
         <Routes>
           <Route path="/" element={<Login />} />
