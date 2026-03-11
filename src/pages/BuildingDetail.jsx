@@ -2,9 +2,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useLiveData } from '../hooks/useLiveData';
 import SensorMetric from '../components/SensorMetric';
 import RecommendationCard from '../components/RecommendationCard';
-import { ChevronRight, Zap, Settings, LayoutGrid, ToggleLeft, ToggleRight } from 'lucide-react';
+import { ChevronRight, Zap, Settings, LayoutGrid, ToggleLeft, ToggleRight, DollarSign, MessageSquare, ClipboardList } from 'lucide-react';
 import { allRecommendations } from '../data/recommendations';
 import { useState } from 'react';
+import BillExplainer from '../components/BillExplainer';
+import TenantComplaintIntelligence from '../components/TenantComplaintIntelligence';
+import ShiftHandoverBrief from '../components/ShiftHandoverBrief';
 
 export default function BuildingDetail() {
   const { buildingId } = useParams();
@@ -125,6 +128,42 @@ export default function BuildingDetail() {
               </span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* New features row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+        {/* Bill Explainer */}
+        <BillExplainer buildingId={building.id} />
+
+        {/* Tenant Complaint Intelligence */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <MessageSquare size={20} className="text-blue-500" />
+              <h3 className="text-sm font-bold text-gray-900">Tenant Complaints</h3>
+            </div>
+            <span className="text-xs text-gray-500">Last 24 hours</span>
+          </div>
+          <TenantComplaintIntelligence />
+          <p className="text-xs text-gray-500 mt-3">
+            AI cross-references complaints against sensor data and auto-resolves when possible
+          </p>
+        </div>
+
+        {/* Shift Handover */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <ClipboardList size={20} className="text-purple-500" />
+              <h3 className="text-sm font-bold text-gray-900">Shift Handover</h3>
+            </div>
+            <span className="text-xs text-gray-500">18:00 today</span>
+          </div>
+          <ShiftHandoverBrief />
+          <p className="text-xs text-gray-500 mt-3">
+            Auto-generated brief ensures zero information gap between shifts
+          </p>
         </div>
       </div>
     </div>

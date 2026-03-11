@@ -1,20 +1,27 @@
 import { useState } from 'react';
-import { Activity, AlertTriangle, DollarSign, ChevronDown, ChevronUp, FileText, X } from 'lucide-react';
+import { Activity, AlertTriangle, DollarSign, ChevronDown, ChevronUp, FileText, X, ShieldCheck } from 'lucide-react';
 import VendorTable from '../components/VendorTable';
 import { vendors } from '../data/vendors';
 import Toast from '../components/Toast';
+import QuoteValidator from '../components/QuoteValidator';
 
 export default function Predictive() {
   const [showVendors, setShowVendors] = useState(false);
   const [selectedVendor, setSelectedVendor] = useState(null);
   const [showWorkOrder, setShowWorkOrder] = useState(false);
   const [toast, setToast] = useState(null);
+  const [quoteValidated, setQuoteValidated] = useState(false);
 
   const vendor = vendors.find(v => v.id === selectedVendor);
 
   const handleSendWO = () => {
     setShowWorkOrder(false);
     setToast(`✓ Work order WO-2026-0847 sent to ${vendor?.name || 'vendor'}`);
+  };
+
+  const handleQuoteValidated = () => {
+    setQuoteValidated(true);
+    setToast('✓ Quote validated — HKD 73,000 overquote detected and challenged');
   };
 
   return (
@@ -105,6 +112,20 @@ export default function Predictive() {
         <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
           <h3 className="text-sm font-semibold text-gray-900 mb-3">Matched Vendors — Chiller Bearing Repair</h3>
           <VendorTable vendors={vendors} selectedId={selectedVendor} onSelect={setSelectedVendor} />
+          {!quoteValidated && selectedVendor && (
+            <div className="mt-4">
+              <QuoteValidator onValidated={handleQuoteValidated} />
+            </div>
+          )}
+          {quoteValidated && (
+            <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-lg p-3 flex items-center gap-3">
+              <ShieldCheck size={18} className="text-ok" />
+              <div>
+                <p className="text-sm font-medium text-emerald-900">Quote Validated — Fair Price Confirmed</p>
+                <p className="text-xs text-emerald-700">HKD 73,000 overquote prevented • Ready to proceed</p>
+              </div>
+            </div>
+          )}
         </div>
       )}
 

@@ -17,7 +17,7 @@ export default function Login() {
     setError('');
     const result = login(email, password);
     if (result.success) {
-      navigate('/portfolio');
+      navigate('/summary');
     } else {
       setError(result.error);
       setShaking(true);

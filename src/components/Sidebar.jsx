@@ -2,18 +2,23 @@ import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import {
   LayoutDashboard, Building2, Zap, Activity,
-  MessageCircle, Sun, Settings, LogOut, ChevronDown, ChevronRight
+  MessageCircle, Sun, Settings, LogOut, ChevronDown, ChevronRight,
+  Clock, Calculator, FileCheck, Droplets
 } from 'lucide-react';
 import { buildings } from '../data/buildings';
 import { useState } from 'react';
 
 const navItems = [
+  { to: '/summary', icon: Clock, label: 'Overnight Summary' },
   { to: '/portfolio', icon: LayoutDashboard, label: 'Portfolio Overview' },
   { to: '/building', icon: Building2, label: 'Buildings', expandable: true },
   { to: '/energy', icon: Zap, label: 'Energy Intelligence' },
   { to: '/predictive', icon: Activity, label: 'Predictive Maintenance', badge: 1 },
+  { to: '/compliance', icon: FileCheck, label: 'EPD Compliance' },
+  { to: '/water', icon: Droplets, label: 'Water Tank Guardian' },
   { to: '/chat', icon: MessageCircle, label: 'AI Assistant' },
   { to: '/briefing', icon: Sun, label: 'Morning Briefing' },
+  { to: '/roi', icon: Calculator, label: 'ROI Calculator' },
 ];
 
 export default function Sidebar({ collapsed, onToggle }) {

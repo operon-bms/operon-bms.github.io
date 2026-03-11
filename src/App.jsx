@@ -10,6 +10,10 @@ import Predictive from './pages/Predictive';
 import AIChat from './pages/AIChat';
 import MorningBriefing from './pages/MorningBriefing';
 import HvacDiagram from './pages/HvacDiagram';
+import OvernightSummary from './pages/OvernightSummary';
+import ROICalculator from './pages/ROICalculator';
+import ComplianceAutopilot from './pages/ComplianceAutopilot';
+import WaterTankGuardian from './pages/WaterTankGuardian';
 import { useState } from 'react';
 
 function ProtectedRoute() {
@@ -71,8 +75,12 @@ export default function App() {
             <Route path="/predictive" element={<Predictive />} />
             <Route path="/chat" element={<AIChat />} />
             <Route path="/briefing" element={<MorningBriefing />} />
+            <Route path="/summary" element={<OvernightSummary />} />
+            <Route path="/roi" element={<ROICalculator />} />
+            <Route path="/compliance" element={<ComplianceAutopilot />} />
+            <Route path="/water" element={<WaterTankGuardian />} />
+            <Route path="*" element={<Navigate to="/summary" replace />} />
           </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </LiveDataProvider>
     </BrowserRouter>
