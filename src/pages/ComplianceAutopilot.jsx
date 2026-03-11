@@ -7,8 +7,8 @@ export default function ComplianceAutopilot() {
 
   const buildings = [
     {
-      id: '1u-mall',
-      name: '1U Mall',
+      id: 'one-taikoo-place',
+      name: 'One Taikoo Place',
       status: 'compliant',
       lastTest: '8 Feb 2026',
       nextTest: '8 Apr 2026',
@@ -212,7 +212,7 @@ export default function ComplianceAutopilot() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <CheckCircle size={20} className="text-ok" />
-              <h2 className="text-lg font-bold text-gray-900">Certificate Generated — 1U Mall</h2>
+              <h2 className="text-lg font-bold text-gray-900">Certificate Generated — One Taikoo Place</h2>
             </div>
             <div className="flex items-center gap-2">
               <button className="px-4 py-2 bg-accent text-white text-xs font-medium rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1">

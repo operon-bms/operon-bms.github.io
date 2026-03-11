@@ -17,7 +17,7 @@ export default function BuildingDetail() {
   const [autoExec, setAutoExec] = useState(true);
   const [autoApprove, setAutoApprove] = useState(false);
 
-  const building = getBuildingData(buildingId || '1u-mall');
+  const building = getBuildingData(buildingId || 'one-taikoo-place');
   if (!building) return <div className="p-8 text-gray-500">Building not found</div>;
 
   const recs = allRecommendations[building.id] || [];

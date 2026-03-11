@@ -10,7 +10,7 @@ export default function MorningBriefing() {
 
   const actions = [
     { id: 'wo', title: 'Approve Pacific Centre Work Order', desc: 'WO-2026-0847 — Chiller-3 bearing replacement', link: '/predictive', cta: 'View & Approve' },
-    { id: 'recs', title: 'Review 1U Mall Recommendations', desc: '2 pending AI optimisations', link: '/building/1u-mall/recommendations', cta: 'Review Now' },
+    { id: 'recs', title: 'Review One Taikoo Place Recommendations', desc: '2 pending AI optimisations', link: '/building/one-taikoo-place/recommendations', cta: 'Review Now' },
     { id: 'co2', title: 'Aberdeen Industrial CO₂ Alert', desc: 'Auto-correction applied, confirm normalisation', link: '/building/aberdeen-industrial', cta: 'Check Status', inlineResult: 'CO₂ normalising: 1,147 ppm — was 1,340 ppm ↓' },
   ];
 
@@ -53,7 +53,7 @@ export default function MorningBriefing() {
               </div>
 
               <div className="text-xs space-y-1.5">
-                <p>✅ <strong>1U Mall</strong> — All systems normal<br/><span className="text-gray-500 ml-5">TES charging: 8% below baseline • 2 AI recs pending</span></p>
+                <p>✅ <strong>One Taikoo Place</strong> — All systems normal<br/><span className="text-gray-500 ml-5">TES charging: 8% below baseline • 2 AI recs pending</span></p>
                 <p>✅ <strong>Harbour View Tower</strong> — All systems normal<br/><span className="text-gray-500 ml-5">Best performer today: 203 kWh saved</span></p>
                 <p>✅ <strong>Central Plaza</strong> — Excellent (Score: 90)<br/><span className="text-gray-500 ml-5">318 kWh saved • 0 pending recommendations</span></p>
                 <p>✅ <strong>Kowloon Bay Centre</strong> — Normal<br/><span className="text-gray-500 ml-5">BAS not enabled — manual monitoring only</span></p>
@@ -66,7 +66,7 @@ export default function MorningBriefing() {
                 <p className="font-semibold text-gray-900 mb-2">TODAY'S 3 ACTIONS REQUIRED</p>
                 <ol className="text-xs space-y-1 list-decimal list-inside text-gray-700">
                   <li>Approve Pacific Centre work order (WO-2026-0847)</li>
-                  <li>Review 1U Mall recommendations (2 pending)</li>
+                  <li>Review One Taikoo Place recommendations (2 pending)</li>
                   <li>Confirm Aberdeen Industrial CO₂ normalisation by 10:00</li>
                 </ol>
               </div>

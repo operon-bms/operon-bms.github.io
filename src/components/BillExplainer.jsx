@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { TrendingUp, TrendingDown, DollarSign, FileText, Download, ChevronRight } from 'lucide-react';
 
-export default function BillExplainer({ buildingId = '1u-mall' }) {
+export default function BillExplainer({ buildingId = 'one-taikoo-place' }) {
   const [showReport, setShowReport] = useState(false);
 
   const billData = {
-    building: '1U Mall',
+    building: 'One Taikoo Place',
     month: 'March 2026',
     total: 284000,
     previousMonth: 261000,

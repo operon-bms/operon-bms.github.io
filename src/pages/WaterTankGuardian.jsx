@@ -8,7 +8,7 @@ export default function WaterTankGuardian() {
     {
       id: 'rooftop-a',
       name: 'Rooftop Tank A',
-      building: '1U Mall',
+      building: 'One Taikoo Place',
       level: 78,
       status: 'normal',
       fillRate: 2.3,
@@ -19,7 +19,7 @@ export default function WaterTankGuardian() {
     {
       id: 'rooftop-b',
       name: 'Rooftop Tank B',
-      building: '1U Mall',
+      building: 'One Taikoo Place',
       level: 45,
       status: 'normal',
       fillRate: 1.1,
@@ -30,7 +30,7 @@ export default function WaterTankGuardian() {
     {
       id: 'break-tank',
       name: 'Break Tank (Basement)',
-      building: '1U Mall',
+      building: 'One Taikoo Place',
       level: 62,
       status: 'normal',
       fillRate: 3.2,
@@ -56,7 +56,7 @@ export default function WaterTankGuardian() {
   ];
 
   const waterQuality = {
-    building: '1U Mall',
+    building: 'One Taikoo Place',
     lastTested: '8 Mar 2026',
     nextTest: '11 Apr 2026',
     parameters: [

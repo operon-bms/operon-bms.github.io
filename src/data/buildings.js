@@ -1,7 +1,7 @@
 export const buildings = [
   {
-    id: "1u-mall",
-    name: "1U Mall",
+    id: "one-taikoo-place",
+    name: "One Taikoo Place",
     type: "Retail/Shopping",
     floors: 6,
     energyScore: 85,

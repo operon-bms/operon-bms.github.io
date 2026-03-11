@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { MessageSquare, CheckCircle, AlertTriangle, Thermometer, Clock, X } from 'lucide-react';
 
 export default function TenantComplaintIntelligence() {
@@ -8,7 +9,7 @@ export default function TenantComplaintIntelligence() {
   const complaint = {
     id: 'CMP-2026-0347',
     unit: '12F',
-    building: '1U Mall',
+    building: 'One Taikoo Place',
     tenant: 'TechStart Ltd',
     type: 'Too warm',
     submitted: '14:23',
@@ -45,21 +46,21 @@ export default function TenantComplaintIntelligence() {
         <span className="text-xs text-gray-400">14:23</span>
       </button>
 
-      {showComplaint && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowComplaint(false)}>
+      {showComplaint && createPortal(
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setShowComplaint(false)}>
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
           <div
-            className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
             onClick={e => e.stopPropagation()}
           >
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-bold text-gray-900">Tenant Complaint Intelligence</h2>
-                <button onClick={() => setShowComplaint(false)} className="text-gray-400 hover:text-gray-600">
-                  <X size={20} />
-                </button>
-              </div>
-
+            <div className="flex items-center justify-between p-6 border-b border-gray-100 shrink-0">
+              <h2 className="text-lg font-bold text-gray-900">Tenant Complaint Intelligence</h2>
+              <button onClick={() => setShowComplaint(false)} className="text-gray-400 hover:text-gray-600">
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-y-auto flex-1">
               {/* Complaint details */}
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
                 <div className="flex items-center justify-between mb-3">
@@ -151,7 +152,7 @@ export default function TenantComplaintIntelligence() {
               </div>
 
               {/* Resolution summary */}
-              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4">
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 mb-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-semibold text-gray-900 mb-1">Resolution Summary</p>
@@ -170,17 +171,17 @@ export default function TenantComplaintIntelligence() {
                   {!complaintResolved ? (
                     <button
                       onClick={() => { setComplaintResolved(true); setShowComplaint(false); }}
-                      className="px-4 py-2 bg-ok text-white text-xs font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+                      className="px-4 py-2 bg-ok text-white text-xs font-medium rounded-lg hover:bg-emerald-700 transition-colors shrink-0"
                     >
                       Mark Resolved
                     </button>
                   ) : (
-                    <span className="text-sm font-medium text-ok">✓ Resolved</span>
+                    <span className="text-sm font-medium text-ok shrink-0">✓ Resolved</span>
                   )}
                 </div>
               </div>
 
-              <p className="text-xs text-gray-500 mt-4 text-center">
+              <p className="text-xs text-gray-500 text-center">
                 Tenant complaint intelligence automatically cross-references complaints against sensor data,
                 takes corrective action when valid, and provides FM with data-backed responses for perception issues.
                 <br />
@@ -189,7 +190,7 @@ export default function TenantComplaintIntelligence() {
             </div>
           </div>
         </div>
-      )}
+      , document.body)}
     </>
   );
 }

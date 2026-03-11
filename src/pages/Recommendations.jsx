@@ -8,7 +8,7 @@ import Toast from '../components/Toast';
 export default function Recommendations() {
   const { buildingId } = useParams();
   const navigate = useNavigate();
-  const id = buildingId || '1u-mall';
+  const id = buildingId || 'one-taikoo-place';
   const recs = allRecommendations[id] || [];
   const [tab, setTab] = useState('pending');
   const [approved, setApproved] = useState(new Set());
@@ -16,7 +16,7 @@ export default function Recommendations() {
   const [toast, setToast] = useState(null);
 
   const buildingName = {
-    '1u-mall': '1U Mall', 'pacific-centre': 'Pacific Centre', 'harbour-view': 'Harbour View Tower',
+    'one-taikoo-place': 'One Taikoo Place', 'pacific-centre': 'Pacific Centre', 'harbour-view': 'Harbour View Tower',
     'central-plaza': 'Central Plaza', 'kowloon-bay': 'Kowloon Bay Centre', 'aberdeen-industrial': 'Aberdeen Industrial'
   }[id] || id;
 

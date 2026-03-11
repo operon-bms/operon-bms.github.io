@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ClipboardList, Clock, AlertTriangle, CheckCircle, Wrench, MessageSquare, X } from 'lucide-react';
 
 export default function ShiftHandoverBrief() {
@@ -22,7 +23,7 @@ export default function ShiftHandoverBrief() {
       {
         id: 2,
         type: 'tenant',
-        title: '1U Mall Unit 12F',
+        title: 'One Taikoo Place Unit 12F',
         description: 'Tenant comfort complaint logged 14:23, auto-resolved — monitor if they complain again',
         icon: MessageSquare,
         color: 'blue',
@@ -63,24 +64,24 @@ export default function ShiftHandoverBrief() {
         )}
       </button>
 
-      {showBrief && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowBrief(false)}>
+      {showBrief && createPortal(
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setShowBrief(false)}>
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
           <div
-            className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
             onClick={e => e.stopPropagation()}
           >
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-lg font-bold text-gray-900">Shift Handover Brief</h2>
-                  <p className="text-xs text-gray-500">{handover.date} • {handover.time}</p>
-                </div>
-                <button onClick={() => setShowBrief(false)} className="text-gray-400 hover:text-gray-600">
-                  <X size={20} />
-                </button>
+            <div className="flex items-center justify-between p-6 border-b border-gray-100 shrink-0">
+              <div>
+                <h2 className="text-lg font-bold text-gray-900">Shift Handover Brief</h2>
+                <p className="text-xs text-gray-500">{handover.date} • {handover.time}</p>
               </div>
-
+              <button onClick={() => setShowBrief(false)} className="text-gray-400 hover:text-gray-600">
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-y-auto flex-1">
               {/* Outgoing to incoming */}
               <div className="flex items-center gap-4 mb-6 pb-4 border-b border-gray-200">
                 <div className="flex-1 text-center">
@@ -181,11 +182,11 @@ export default function ShiftHandoverBrief() {
               <div className="flex gap-3">
                 <button
                   onClick={() => { setBriefViewed(true); setShowBrief(false); }}
-                  className="flex-1 py-2.5 bg-accent text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                  className="flex-1 py-2.5 bg-accent text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shrink-0"
                 >
                   Acknowledge & Close
                 </button>
-                <button className="px-4 py-2.5 border border-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-1">
+                <button className="px-4 py-2.5 border border-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-1 shrink-0">
                   <MessageSquare size={14} /> Add Note
                 </button>
               </div>
@@ -198,7 +199,7 @@ export default function ShiftHandoverBrief() {
             </div>
           </div>
         </div>
-      )}
+      , document.body)}
     </>
   );
 }

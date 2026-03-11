@@ -10,11 +10,11 @@ export default function HvacDiagram() {
   const [analyzing, setAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState(null);
 
-  const building = getBuildingData(buildingId || '1u-mall');
+  const building = getBuildingData(buildingId || 'one-taikoo-place');
   if (!building) return <div className="p-8 text-gray-500">Building not found</div>;
 
   const s = building.sensors;
-  const names = { '1u-mall': '1U Mall', 'pacific-centre': 'Pacific Centre', 'harbour-view': 'Harbour View Tower', 'central-plaza': 'Central Plaza', 'kowloon-bay': 'Kowloon Bay Centre', 'aberdeen-industrial': 'Aberdeen Industrial' };
+  const names = { 'one-taikoo-place': 'One Taikoo Place', 'pacific-centre': 'Pacific Centre', 'harbour-view': 'Harbour View Tower', 'central-plaza': 'Central Plaza', 'kowloon-bay': 'Kowloon Bay Centre', 'aberdeen-industrial': 'Aberdeen Industrial' };
 
   const handleAnalyze = () => {
     setAnalyzing(true);

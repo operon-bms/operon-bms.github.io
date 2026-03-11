@@ -24,14 +24,14 @@ export default function OvernightSummary() {
     {
       category: 'CHW Setpoint Optimisation',
       count: 4,
-      buildings: ['1U Mall', 'Pacific Centre', 'Harbour View Tower'],
+      buildings: ['One Taikoo Place', 'Pacific Centre', 'Harbour View Tower'],
       icon: Thermometer,
       color: 'blue',
       details: [
-        { time: '01:23', building: '1U Mall', action: 'CHW setpoint raised 0.5°C (low occupancy)', saving: 'HKD 47' },
+        { time: '01:23', building: 'One Taikoo Place', action: 'CHW setpoint raised 0.5°C (low occupancy)', saving: 'HKD 47' },
         { time: '02:47', building: 'Pacific Centre', action: 'CHW setpoint raised 1.0°C (night mode)', saving: 'HKD 83' },
         { time: '03:15', building: 'Harbour View Tower', action: 'CHW setpoint adjusted 0.3°C', saving: 'HKD 31' },
-        { time: '04:52', building: '1U Mall', action: 'CHW setpoint lowered 0.5°C (pre-cool)', saving: 'HKD 22' },
+        { time: '04:52', building: 'One Taikoo Place', action: 'CHW setpoint lowered 0.5°C (pre-cool)', saving: 'HKD 22' },
       ]
     },
     {
@@ -59,11 +59,11 @@ export default function OvernightSummary() {
     {
       category: 'TES Charging Schedule Shift',
       count: 1,
-      buildings: ['1U Mall'],
+      buildings: ['One Taikoo Place'],
       icon: Clock,
       color: 'purple',
       details: [
-        { time: '04:00', building: '1U Mall', action: 'TES charging shifted 45 min earlier (weather forecast adjustment)', saving: 'HKD 127' },
+        { time: '04:00', building: 'One Taikoo Place', action: 'TES charging shifted 45 min earlier (weather forecast adjustment)', saving: 'HKD 127' },
       ]
     },
   ];
@@ -82,14 +82,14 @@ export default function OvernightSummary() {
     },
     {
       id: 'energy',
-      title: 'Review 1U Mall Energy Schedule Change',
-      building: '1U Mall',
+      title: 'Review One Taikoo Place Energy Schedule Change',
+      building: 'One Taikoo Place',
       urgency: 'medium',
       timeEstimate: '1 min',
       description: 'Proposed AHU operating hours adjustment for CNY period',
       cost: 'N/A',
       savings: 'Est. HKD 340/day savings',
-      link: '/building/1u-mall/recommendations',
+      link: '/building/one-taikoo-place/recommendations',
     },
     {
       id: 'epd',

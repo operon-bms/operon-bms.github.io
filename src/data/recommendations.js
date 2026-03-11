@@ -1,5 +1,5 @@
 export const allRecommendations = {
-  "1u-mall": [
+  "one-taikoo-place": [
     {
       id: "rec-001",
       priority: 1,

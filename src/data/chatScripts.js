@@ -39,7 +39,7 @@ Fixing items ② and ③ should recover approximately 11% efficiency.
 **Aberdeen Industrial** — CO₂: 1,340 ppm (EPD Class 1 limit: 1,000 ppm) — **NON-COMPLIANT**
 → Action taken: Increased fresh air supply by 20%. Expected normalisation in 15 min.
 
-**1U Mall** — CO₂: 1,119 ppm (limit: 1,000 ppm) — **WARNING**
+**One Taikoo Place** — CO₂: 1,119 ppm (limit: 1,000 ppm) — **WARNING**
 → Action taken: Fresh air supply increased by 10%. Monitoring.
 
 ✅ 4 buildings fully compliant (Central Plaza, Harbour View, Kowloon Bay, Pacific Centre)
