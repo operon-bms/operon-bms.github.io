@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Sensor value transition */
+.sensor-value {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card hover effect */
+.card-hover {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Pulse glow for warning/critical */
+.pulse-warn {
+  animation: pulse-glow-amber 2s ease-in-out infinite;
+}
+.pulse-crit {
+  animation: pulse-glow-red 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-amber {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 12px 4px rgba(217, 119, 6, 0.15);
+  }
+}
+
+@keyframes pulse-glow-red {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 12px 4px rgba(220, 38, 38, 0.15);
+  }
+}
+
+/* Typewriter cursor */
+.typewriter-cursor::after {
+  content: "▊";
+  animation: blink 0.8s step-end infinite;
+  color: #2563eb;
+  margin-left: 1px;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Flow animation for HVAC pipes */
+.pipe-flow {
+  stroke-dasharray: 8 4;
+  animation: flow 1s linear infinite;
+}
+
+@keyframes flow {
+  0% {
+    stroke-dashoffset: 12;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.pipe-flow-reverse {
+  stroke-dasharray: 8 4;
+  animation: flow-reverse 1s linear infinite;
+}
+
+@keyframes flow-reverse {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 12;
+  }
+}
+
+/* Toast animation */
+.toast-enter {
+  animation: toast-in 0.3s ease-out forwards;
+}
+
+@keyframes toast-in {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Sidebar nav hover */
+.nav-item {
+  position: relative;
+  transition: all 0.2s ease;
+}
+.nav-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #2563eb;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+.nav-item:hover::before,
+.nav-item.active::before {
+  transform: scaleY(1);
+}
+
+/* Energy gauge */
+.gauge-circle {
+  transition: stroke-dashoffset 1s ease-in-out;
+}
+
+/* WhatsApp bubble style */
+.wa-bubble {
+  position: relative;
+  border-radius: 8px;
+  padding: 12px 16px;
+  max-width: 85%;
+}
+.wa-bubble-left {
+  background: white;
+  border: 1px solid #e2e8f0;
+  margin-right: auto;
+}
+.wa-bubble-right {
+  background: #dcf8c6;
+  margin-left: auto;
+}
