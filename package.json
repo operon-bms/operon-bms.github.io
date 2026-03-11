@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://xianjingkoay.github.io/facilityai-demo",
+  "homepage": "https://operon-bms.github.io",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
