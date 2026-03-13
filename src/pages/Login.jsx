@@ -102,7 +102,7 @@ export default function Login() {
           </form>
         </div>
 
-        <p className="text-center text-[11px] text-gray-500 mt-6">
+        <p className="text-center text-[10px] sm:text-[11px] text-gray-500 mt-6 px-4">
           Protected by enterprise-grade security • ISO 27001
         </p>
       </div>

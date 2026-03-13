@@ -68,7 +68,7 @@ export default function Portfolio() {
                     {b.pendingRecs > 0 && <span className="bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{b.pendingRecs}</span>}
                   </div>
                   <p className="text-xs text-gray-500">{b.type} • {b.floors}F</p>
-                  <div className="flex items-center gap-2.5 mt-3">
+                  <div className="flex items-center gap-2.5 mt-3 flex-wrap">
                     {Object.entries(b.sensors).map(([k, s]) => <SensorMetric key={k} {...s} compact />)}
                   </div>
                   <div className="flex items-center gap-3 mt-3 flex-wrap">

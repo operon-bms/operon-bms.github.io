@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Building2, Zap, Activity,
   MessageCircle, Sun, Settings, LogOut, ChevronDown, ChevronRight,
   Clock, Calculator, FileCheck, Droplets, BarChart3,
-  ClipboardList, MessageSquare, DollarSign, Sparkles
+  ClipboardList, MessageSquare, DollarSign, Sparkles, X
 } from 'lucide-react';
 import { buildings } from '../data/buildings';
 import { useState } from 'react';
@@ -46,7 +46,7 @@ const navSections = [
   },
 ];
 
-export default function Sidebar({ collapsed, onToggle }) {
+export default function Sidebar({ collapsed, onToggle, mobileOpen, onCloseMobile }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { buildingId } = useParams();
@@ -58,13 +58,20 @@ export default function Sidebar({ collapsed, onToggle }) {
   };
 
   return (
-    <aside className={`fixed top-0 left-0 h-screen bg-navy-900 text-white flex flex-col z-40 transition-all duration-300 ${collapsed ? 'w-16' : 'w-60'}`}>
+    <aside className={`fixed top-0 left-0 h-screen bg-navy-900 text-white flex flex-col z-50 transition-transform duration-300 md:translate-x-0 ${mobileOpen ? 'translate-x-0 w-64' : '-translate-x-full'} ${collapsed ? 'md:w-16' : 'md:w-60'}`}>
       {/* Logo */}
-      <div className="flex items-center gap-2.5 px-4 h-16 border-b border-white/10 shrink-0">
-        <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-sm font-bold shrink-0">
-          ⚡
+      <div className={`flex items-center gap-2.5 px-4 h-16 border-b border-white/10 shrink-0 ${(!collapsed || mobileOpen) ? 'justify-between' : 'justify-center'}`}>
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-sm font-bold shrink-0">
+            ⚡
+          </div>
+          {(!collapsed || mobileOpen) && <span className="text-lg font-bold tracking-tight">Operon</span>}
         </div>
-        {!collapsed && <span className="text-lg font-bold tracking-tight">Operon</span>}
+        {mobileOpen && (
+          <button onClick={onCloseMobile} className="md:hidden p-1.5 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
+            <X size={20} />
+          </button>
+        )}
       </div>
 
       {/* Nav */}
@@ -72,12 +79,12 @@ export default function Sidebar({ collapsed, onToggle }) {
         {navSections.map((section, sIdx) => (
           <div key={sIdx}>
             {/* Section title */}
-            {section.title && !collapsed && (
+            {section.title && (!collapsed || mobileOpen) && (
               <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider px-4 pt-4 pb-1.5">
                 {section.title}
               </p>
             )}
-            {section.title && collapsed && <div className="border-t border-white/5 my-2 mx-3" />}
+            {section.title && collapsed && !mobileOpen && <div className="border-t border-white/5 my-2 mx-3" />}
 
             {section.items.map(item => {
               if (item.expandable) {
@@ -88,19 +95,20 @@ export default function Sidebar({ collapsed, onToggle }) {
                       className="nav-item w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
                     >
                       <item.icon size={18} className="shrink-0" />
-                      {!collapsed && (
+                      {(!collapsed || mobileOpen) && (
                         <>
                           <span className="flex-1 text-left">{item.label}</span>
                           {buildingsExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
                         </>
                       )}
                     </button>
-                    {buildingsExpanded && !collapsed && (
+                    {buildingsExpanded && (!collapsed || mobileOpen) && (
                       <div className="ml-4 border-l border-white/10">
                         {buildings.map(b => (
                           <NavLink
                             key={b.id}
                             to={`/building/${b.id}`}
+                            onClick={() => mobileOpen && onCloseMobile()}
                             className={({ isActive }) =>
                               `nav-item flex items-center gap-2 px-4 py-1.5 text-xs transition-colors ${
                                 isActive ? 'active text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -123,6 +131,7 @@ export default function Sidebar({ collapsed, onToggle }) {
                 <NavLink
                   key={item.to}
                   to={item.to}
+                  onClick={() => mobileOpen && onCloseMobile()}
                   className={({ isActive }) =>
                     `nav-item flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
                       isActive ? 'active text-white bg-white/10' : 'text-gray-300 hover:text-white hover:bg-white/5'
@@ -130,7 +139,7 @@ export default function Sidebar({ collapsed, onToggle }) {
                   }
                 >
                   <item.icon size={18} className="shrink-0" />
-                  {!collapsed && (
+                  {(!collapsed || mobileOpen) && (
                     <>
                       <span className="flex-1">{item.label}</span>
                       {item.badge && (
@@ -151,7 +160,7 @@ export default function Sidebar({ collapsed, onToggle }) {
       </nav>
 
       {/* User */}
-      {!collapsed && (
+      {(!collapsed || mobileOpen) && (
         <div className="border-t border-white/10 p-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-accent/30 flex items-center justify-center text-xs font-semibold">
